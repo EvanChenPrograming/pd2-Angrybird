@@ -1,0 +1,100 @@
+#include "bird_blue.h"
+
+
+Bird_blue::Bird_blue(float x, float y, float radius, QTimer *timer, QPixmap pixmap, b2World *world, QGraphicsScene *scene,QList<GameItem *> birdList):GameItem(world)
+{
+    // Set pixmap
+    g_pixmap.setPixmap(pixmap);
+    g_pixmap.setTransformOriginPoint(g_pixmap.boundingRect().width()/2,g_pixmap.boundingRect().height()/2);
+    g_size = QSize(radius*2,radius*2);
+
+    // Create Body
+    b2BodyDef bodydef;
+    bodydef.type = b2_dynamicBody;
+    bodydef.bullet = true;
+    bodydef.position.Set(x,y);
+    bodydef.userData = this;
+    g_body = world->CreateBody(&bodydef);
+    b2CircleShape bodyshape;
+    bodyshape.m_radius = radius;
+    b2FixtureDef fixturedef;
+    fixturedef.shape = &bodyshape;
+    fixturedef.density = BIRD_DENSITY;
+    fixturedef.friction = BIRD_FRICTION;
+    fixturedef.restitution = BIRD_RESTITUTION;
+    g_body->SetAngularDamping(3);
+    g_body->CreateFixture(&fixturedef);
+
+    // Bound timer
+    connect(timer, SIGNAL(timeout()), this,SLOT(paint()));
+
+    scene->addItem(&g_pixmap);
+    tx=x;
+    ty=y;
+    tradius=radius;
+    ttimer=timer;
+    tpixmap=pixmap;
+    tworld=world;
+    tscene=scene;
+    tbirdList=birdList;
+}
+Bird_blue::Bird_blue(float x, float y, float radius, QTimer *timer, QPixmap pixmap, b2World *world, QGraphicsScene *scene):GameItem(world)
+{
+    // Set pixmap
+    g_pixmap.setPixmap(pixmap);
+    g_pixmap.setTransformOriginPoint(g_pixmap.boundingRect().width()/2,g_pixmap.boundingRect().height()/2);
+    g_size = QSize(radius*2,radius*2);
+
+    // Create Body
+    b2BodyDef bodydef;
+    bodydef.type = b2_dynamicBody;
+    bodydef.bullet = true;
+    bodydef.position.Set(x,y);
+    bodydef.userData = this;
+    g_body = world->CreateBody(&bodydef);
+    b2CircleShape bodyshape;
+    bodyshape.m_radius = radius;
+    b2FixtureDef fixturedef;
+    fixturedef.shape = &bodyshape;
+    fixturedef.density = BIRD_DENSITY;
+    fixturedef.friction = BIRD_FRICTION;
+    fixturedef.restitution = BIRD_RESTITUTION;
+    g_body->SetAngularDamping(3);
+    g_body->CreateFixture(&fixturedef);
+
+    // Bound timer
+    connect(timer, SIGNAL(timeout()), this,SLOT(paint()));
+
+    scene->addItem(&g_pixmap);
+}
+
+void Bird_blue::setLinearVelocity(b2Vec2 velocity)
+{
+    g_body->SetLinearVelocity(velocity);
+}
+
+void Bird_blue::hit(float impulse){
+    if(impulse>10)std::cout<<"in bird: "<<impulse<<std::endl;
+    //i++;
+    if(impulse>500)now_phase=destroy;
+}
+
+void Bird_blue::controled(){
+    if(isControled==true)return;
+    isControled=true;
+    b2Vec2 pos=g_body->GetPosition();
+    b2Vec2 vec=g_body->GetLinearVelocity();
+    GameItem *birdie;
+    birdie = new Bird_blue(tx,ty,tradius,ttimer,tpixmap,tworld,tscene);
+    birdie->getBody().SetTransform(pos,0);
+    birdie->getBody().SetLinearVelocity(b2Vec2(vec.x+5,vec.y));
+    birdie->inWaterD=-2;
+    tbirdList.push_back(birdie);
+    birdie = new Bird_blue(tx,ty,tradius,ttimer,tpixmap,tworld,tscene);
+    birdie->getBody().SetTransform(pos,0);
+    birdie->getBody().SetLinearVelocity(b2Vec2(vec.x,vec.y-5));
+    birdie->inWaterD=-2;
+    tbirdList.push_back(birdie);
+
+
+}

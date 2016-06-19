@@ -1,0 +1,48 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="ground.png">image/GROUND.png</file>
+        <file alias="bird.png">image/Normal_Bird_1.png</file>
+        <file>image/backgroung.png</file>
+        <file>image/black.png</file>
+        <file>image/blue.png</file>
+        <file>image/yellow.png</file>
+        <file>image/berd0.png</file>
+        <file>image/berd1.png</file>
+        <file>image/berd2.png</file>
+        <file>image/berd3.png</file>
+        <file>image/berd4.png</file>
+        <file>image/exit.png</file>
+        <file>image/gold_egg.png</file>
+        <file>image/helmetPig0.png</file>
+        <file>image/helmetPig1.png</file>
+        <file>image/helmetPig2.png</file>
+        <file>image/ice0.png</file>
+        <file>image/ice1.png</file>
+        <file>image/ice2.png</file>
+        <file>image/king0.png</file>
+        <file>image/king1.png</file>
+        <file>image/king2.png</file>
+        <file>image/pig0.png</file>
+        <file>image/pig1.png</file>
+        <file>image/pillar.png</file>
+        <file>image/restart.png</file>
+        <file>image/rock0.png</file>
+        <file>image/rock1.png</file>
+        <file>image/rock2.png</file>
+        <file>image/stonestick0.png</file>
+        <file>image/stonestick1.png</file>
+        <file>image/stonestick2.png</file>
+        <file>image/thinwood0.png</file>
+        <file>image/thinwood1.png</file>
+        <file>image/number_0.png</file>
+        <file>image/number_1.png</file>
+        <file>image/number_2.png</file>
+        <file>image/number_3.png</file>
+        <file>image/number_4.png</file>
+        <file>image/number_5.png</file>
+        <file>image/number_6.png</file>
+        <file>image/number_7.png</file>
+        <file>image/number_8.png</file>
+        <file>image/number_9.png</file>
+    </qresource>
+</RCC>
