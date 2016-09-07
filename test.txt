@@ -1,0 +1,5 @@
+Script started on Wed Sep  7 20:20:17 2016
+[?1034hbash-3.2$ 
+bash-3.2$ exit
+
+Script done on Wed Sep  7 20:20:23 2016
